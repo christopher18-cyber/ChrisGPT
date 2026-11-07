@@ -1,0 +1,14 @@
+from groq import Groq
+import os
+import certifi
+from dotenv import load_dotenv
+
+
+os.environ["SSL_CERT_FILE"] = certifi.where()
+load_dotenv()
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+client = Groq(api_key=GROQ_API_KEY)
+
+models = client.models.list()
+for model in models.data:
+  print(model.id)
